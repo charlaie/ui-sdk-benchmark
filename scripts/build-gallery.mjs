@@ -2,9 +2,10 @@
 // Builds the static results site from finished runs:
 //   index.html          the writeup (docs/pilot-findings.html), with a table of contents
 //   runs.html           every run as a card, grouped by task in a model x library grid
-//   runs/<id>/          one page per run: the built app in a resizable viewer, metrics, screenshots
-// Plain static files with relative links: deployable to any static host, or opened from disk. Raw event
-// logs, prompts, agent source, Codex rollouts and local paths are never copied.
+//   runs/<id>/          one page per run: the built app in a resizable viewer, metrics, the prompt, screenshots
+// Plain static files with relative links: deployable to any static host, or opened from disk. The prompt is
+// published (it is built from files in the repo); raw event logs, agent source, Codex rollouts and local
+// paths are never copied.
 //
 //   node scripts/build-gallery.mjs [--config <file>] [--runs <dir>] [--out gallery] [--include-smoke]
 import crypto from 'node:crypto'
@@ -180,6 +181,14 @@ dl{margin:0;display:grid;gap:8px}dl div{display:flex;justify-content:space-betwe
 .section-title{font-size:26px;font-weight:600;letter-spacing:-.015em;margin:56px 0 4px}
 .gallery-shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:16px}.gallery-shots figure{margin:0}
 .gallery-shots img{display:block;width:100%;border:1px solid var(--border);border-radius:10px}.gallery-shots figcaption{margin-top:6px;font-size:13px}
+.prompt{margin:16px 0 0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.prompt summary{cursor:pointer;padding:14px 20px;font-weight:600;font-size:15px;list-style:none;display:flex;align-items:center;gap:10px;user-select:none}
+.prompt summary::-webkit-details-marker{display:none}.prompt summary::before{content:"";width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);transition:transform .15s;flex:none}
+.prompt[open] summary::before{transform:rotate(45deg)}.prompt summary:hover{background:var(--surface-2)}.prompt[open] summary{border-bottom:1px solid var(--border)}
+.md{padding:8px 28px 24px;max-width:860px;font-size:15px;line-height:1.65;color:var(--text-2)}@media (max-width:600px){.md{padding:4px 16px 18px}}
+.md h3,.md h4,.md h5{font-family:var(--serif);color:var(--text);font-weight:600;letter-spacing:-.01em;margin:28px 0 8px;line-height:1.25}.md h3{font-size:24px}.md h4{font-size:19px}.md h5{font-size:16px}
+.md p{margin:10px 0}.md ul,.md ol{padding-left:22px;margin:8px 0}.md li{margin:5px 0}.md li>ul,.md li>ol{margin:4px 0}.md li::marker{color:var(--muted)}.md strong{color:var(--text)}
+.md .table-wrap{box-shadow:none;margin:14px 0}.md table{font-size:13.5px}
 footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:14px}footer .container{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}`
 
 function shell(title, body, { prefix = '', active = '', script = '' } = {}) {
@@ -287,7 +296,63 @@ function runsPage(records) {
   return shell(`${SITE}: runs`, body, { active: 'runs' })
 }
 
-function runPage(r, screenshots) {
+function mdInline(text) {
+  return text.split(/(`[^`]+`)/).map((part, i) => (i % 2 ? `<code>${esc(part.slice(1, -1))}</code>` : esc(part).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>'))).join('')
+}
+function mdList(items) {
+  let i = 0
+  const level = (indent) => {
+    const first = items[i]
+    const tag = first.ordered ? 'ol' : 'ul'
+    let html = `<${tag}${first.ordered && first.start !== 1 ? ` start="${first.start}"` : ''}>`
+    while (i < items.length && items[i].indent >= indent) {
+      if (items[i].indent > indent) html = html.replace(/<\/li>$/, '') + level(items[i].indent) + '</li>'
+      else html += `<li>${mdInline(items[i++].text)}</li>`
+    }
+    return html + `</${tag}>`
+  }
+  return level(items[0].indent)
+}
+function markdown(src) {
+  const lines = src.replace(/\r/g, '').split('\n')
+  const out = []
+  let para = []
+  const flush = () => { if (para.length) out.push(`<p>${mdInline(para.join(' '))}</p>`); para = [] }
+  const listRe = /^(\s*)([-*]|(\d+)\.)\s+(.*)$/
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+    let m
+    if (!line.trim()) { flush(); continue }
+    if ((m = line.match(/^(#{1,4})\s+(.*)$/))) { flush(); const h = Math.min(m[1].length + 2, 6); out.push(`<h${h}>${mdInline(m[2])}</h${h}>`); continue }
+    if (line.trimStart().startsWith('|') && /^\s*\|?\s*:?-{3,}/.test(lines[i + 1] ?? '')) {
+      flush()
+      const cells = (l) => l.trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim())
+      const head = cells(line)
+      const rows = []
+      for (i += 2; i < lines.length && lines[i].trimStart().startsWith('|'); i++) rows.push(cells(lines[i]))
+      i--
+      out.push(`<div class="table-wrap"><table><thead><tr>${head.map((c) => `<th>${mdInline(c)}</th>`).join('')}</tr></thead><tbody>${rows.map((r) => `<tr>${r.map((c) => `<td>${mdInline(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`)
+      continue
+    }
+    if (listRe.test(line)) {
+      flush()
+      const items = []
+      for (; i < lines.length && lines[i].trim(); i++) {
+        const lm = lines[i].match(listRe)
+        if (lm) items.push({ indent: lm[1].length, ordered: !!lm[3], start: lm[3] ? Number(lm[3]) : 1, text: lm[4] })
+        else items[items.length - 1].text += ' ' + lines[i].trim()
+      }
+      i--
+      out.push(mdList(items))
+      continue
+    }
+    para.push(line.trim())
+  }
+  flush()
+  return out.join('\n')
+}
+
+function runPage(r, screenshots, prompt) {
   const a = r.quality?.acceptance
   const n = (v) => (v == null ? '–' : Math.round(v).toLocaleString('en-US'))
   const min = (ms) => (ms == null ? '–' : `${(ms / 60000).toFixed(1)} min`)
@@ -304,6 +369,10 @@ function runPage(r, screenshots) {
     : '<div class="callout"><p>This run produced no working build, so there is no app to show.</p></div>'
   const shots = screenshots.length
     ? `<h2 class="section-title">Screenshots</h2><p class="muted small">Taken by the evaluator at three widths in light and dark mode.</p><div class="gallery-shots">${screenshots.map((s) => `<figure><img loading="lazy" src="screenshots/${esc(s.file)}" alt="${s.width}px wide, ${s.scheme} mode"><figcaption class="muted">${s.width}px · ${s.scheme}</figcaption></figure>`).join('')}</div>`
+    : ''
+  const promptSection = prompt
+    ? `<h2 class="section-title">Prompt</h2><p class="muted small">The complete prompt the agent received, verbatim (${prompt.trim().split(/\s+/).length.toLocaleString('en-US')} words). Both models got exactly the same text for this task; the shadcn/ui and UI SDK versions differ only in the Stack paragraph. <a href="prompt.md">Raw markdown</a></p>
+<details class="prompt"><summary>Show the full prompt</summary><div class="md">${markdown(prompt)}</div></details>`
     : ''
   const body = `<div class="container"><div class="page-head"><div class="crumbs"><a href="../../runs.html">Runs</a> / <a href="../../runs.html#${esc(r.task)}">${esc(r.taskTitle)}</a></div>
 <h1>${esc(r.taskTitle)}</h1><div class="chips"><span class="pill"><span class="dot ${r.arm}"></span>${esc(armLabel(r.arm))}</span><span class="pill">${esc(agentLabel(r))}</span>${r.effort ? `<span class="pill">effort ${esc(r.effort)}</span>` : ''}${r.rep > 1 ? `<span class="pill">rep ${r.rep}</span>` : ''}</div></div>
@@ -340,6 +409,7 @@ ${viewer}
     ['Bundle (gzip)', r.outcome?.bundle ? `${(r.outcome.bundle.gzipBytes / 1024).toFixed(1)} KB` : '–'],
     ['Dependencies added', esc(deps)],
   ])}<p class="muted small" style="margin:12px 0 0">${esc(r.model)}, CLI ${esc(r.cliVersion)}; ${libs}.</p></div></div>
+${promptSection}
 ${shots}</div>`
   const script = r.hasApp
     ? `<script>(()=>{const f=document.getElementById('app'),st=document.getElementById('stage'),H=820;let w=1280;
@@ -374,10 +444,13 @@ function main() {
     }
     const rec = publicRecord(m, oid, hasApp, axeNodes(runDir))
     rec.quality = rec.quality && { ...rec.quality, screenshots: shots }
-    pages.push([dest, rec, shots])
+    const promptFile = path.join(runDir, 'prompt.md')
+    const prompt = fs.existsSync(promptFile) ? fs.readFileSync(promptFile, 'utf8') : null
+    if (prompt) fs.writeFileSync(path.join(dest, 'prompt.md'), prompt)
+    pages.push([dest, rec, shots, prompt])
     records.push(rec)
   }
-  for (const [dest, rec, shots] of pages) fs.writeFileSync(path.join(dest, 'index.html'), runPage(rec, shots))
+  for (const [dest, rec, shots, prompt] of pages) fs.writeFileSync(path.join(dest, 'index.html'), runPage(rec, shots, prompt))
   records.sort((a, b) => a.task.localeCompare(b.task) || agentRank(a.agent) - agentRank(b.agent) || a.arm.localeCompare(b.arm) || a.rep - b.rep)
   writeJson(path.join(outDir, 'data/runs.json'), records)
   fs.writeFileSync(path.join(outDir, 'assets/style.css'), CSS)

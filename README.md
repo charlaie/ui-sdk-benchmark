@@ -228,11 +228,13 @@ disk:
 - `runs.html`: every run as a card with a screenshot and headline metrics, grouped by task in a
   model × library grid.
 - `runs/<id>/index.html`: the run's app in a viewer with width and theme switches, plus metrics, the
-  acceptance items and screenshots. The app itself is at `runs/<id>/app/`.
+  acceptance items, the full prompt the agent received and screenshots. The app itself is at
+  `runs/<id>/app/` and the raw prompt at `runs/<id>/prompt.md`.
 - `data/runs.json`: the public metrics for every run.
 
-Raw event logs, Codex rollouts, prompts, agent source and local paths are never copied into the
-gallery; it holds only the built apps, screenshots and metrics.
+Raw event logs, Codex rollouts, agent source and local paths are never copied into the gallery; it
+holds only the built apps, screenshots, metrics and prompts (which are assembled from files already in
+the repo).
 
 ### Publishing the gallery
 
