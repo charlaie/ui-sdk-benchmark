@@ -1,0 +1,182 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Two coding agents built the same four apps with shadcn/ui and with UI SDK. Results, findings and every app to try."><meta name="color-scheme" content="light dark"><title>UI SDK vs shadcn: findings</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap"><link rel="stylesheet" href="assets/style.css"></head><body>
+<header class="nav"><div class="container"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>UI SDK vs shadcn</a><nav class="nav-links" aria-label="Main"><a href="index.html" aria-current="page">Findings</a><a href="runs.html">Runs</a></nav></div></header>
+<main><div class="container"><header class="hero">
+<p class="eyebrow">Benchmark report · November 2026</p>
+<h1>Does the component library matter to a coding agent?</h1>
+<p class="lead">Barely, in this test. Two coding agents built the same four apps once with shadcn/ui and once with UI SDK. All 16 apps work, and each model's two versions of an app look alike. The model decided the visual style; the library mostly didn't. The one difference that held for both models is accessibility: UI SDK apps had fewer automated failures, most likely because of UI SDK's guidance for agents rather than its components.</p>
+<div class="stats">
+<div class="stat"><span class="stat-value">16 / 16</span><span class="stat-label">apps built and working</span></div>
+<div class="stat"><span class="stat-value">127 vs 125</span><span class="stat-label">acceptance items passed of 128, shadcn vs UI SDK</span></div>
+<div class="stat"><span class="stat-value">742 vs 69</span><span class="stat-label">failing accessibility checks, shadcn vs UI SDK</span></div>
+<div class="stat"><span class="stat-value">2 styles</span><span class="stat-label">one house style per model, whichever the library</span></div>
+</div>
+</header><div class="doc"><aside class="toc"><nav aria-label="On this page"><p>On this page</p><ol><li><a href="#key-findings">Key findings</a></li><li><a href="#what-we-ran">What we ran</a></li><li><a href="#function">Function</a></li><li><a href="#look-the-model-s-house-style">Look: the model&#39;s house style</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#components-library-or-hand-built">Components: library or hand-built</a></li><li><a href="#did-ui-sdk-help">Did UI SDK help?</a></li><li><a href="#test-fixes-and-validity">Test fixes and validity</a></li><li><a href="#limitations-and-next-steps">Limitations and next steps</a></li></ol></nav></aside><article class="prose">
+
+<h2 id="key-findings">Key findings</h2>
+<div class="takeaways">
+<div class="takeaway"><h3>Function: no difference</h3><p>Both libraries scored near the ceiling with both models: 127 of 128 acceptance items for shadcn, 125 for UI SDK. Every build passed.</p></div>
+<div class="takeaway"><h3>The model sets the look</h3><p>With no style instructions, Codex gave every app an invented brand, 7 of 8 in dark green. Opus kept each library's stock theme. Within each model, the two libraries' apps look alike.</p></div>
+<div class="takeaway"><h3>Accessibility favours UI SDK</h3><p>UI SDK apps had fewer failing axe checks with both models: 54 against 684 for Codex, 15 against 58 for Opus. Most of the gap is colour contrast in the agents' own styling.</p></div>
+<div class="takeaway"><h3>Guidance, not components</h3><p>The ui-sdk skill tells the agent to meet 4.5:1 contrast and check it in a browser; the shadcn skill doesn't. That, more than the components, likely explains the accessibility gap.</p></div>
+<div class="takeaway"><h3>Same split of components</h3><p>Both models used the library for standard controls and hand-built grids and canvases. UI SDK ships a calendar, combobox and command palette that shadcn runs wrote by hand.</p></div>
+<div class="takeaway"><h3>Too small to rank</h3><p>One run per cell, and tests corrected after seeing these outputs. Treat the accessibility gap as a lead to test, not a result.</p></div>
+</div>
+
+<h2 id="what-we-ran">What we ran</h2>
+<p>Each agent built each task once in each library: 16 runs, single-shot, with no human feedback. Both agents got the same prompts, starters, isolation and hidden tests.</p>
+<div class="table-wrap"><table>
+<tbody>
+<tr><td>Agents</td><td>Codex CLI 0.169.0 with <code>gpt-6.1-sol</code>, and Claude Code 2.1.325 with Opus 5.5 (<code>claude-opus-5-5</code>), both at high effort</td></tr>
+<tr><td>Tasks</td><td>Meeting booking dialog, issue triage inbox, spreadsheet grid, agent flow canvas (<a href="runs.html">see all runs</a>)</td></tr>
+<tr><td>Libraries</td><td>shadcn/ui 4.23 (base-nova preset) with the shadcn skill; UI SDK 0.1.0-beta.5 (<code>@ui-sdk/react</code>, <code>@ui-sdk/core</code> and its default look <code>web.css</code>) with the ui-sdk skill</td></tr>
+<tr><td>Starter</td><td>Identical Vite 8, React 19.3, TypeScript 7 and Tailwind 4.3 templates, same system font in both</td></tr>
+<tr><td>Prompt</td><td>The same task spec and rules for both libraries; only a one-paragraph stack note differs</td></tr>
+<tr><td>Isolation</td><td>A Docker container with only the workspace, an isolated home and the CLI mounted</td></tr>
+<tr><td>Scoring</td><td>Hidden Playwright acceptance suites (64 items per library and model), axe accessibility checks, build, cost and time</td></tr>
+</tbody></table></div>
+<p>The agents never saw our acceptance tests: the repo wasn't mounted, and no event log mentions it. Both agents did check their own work in a browser, writing Playwright scripts from the spec. Codex ran on 2026-11-15 and Opus on 2026-11-16 and 17. Both hit their subscription's usage limit mid-batch; the interrupted runs were redone from scratch after the reset.</p>
+
+<h2 id="function">Function</h2>
+<p>Every app built and passed nearly all of its acceptance items. Across both models the libraries differ by two items out of 128.</p>
+<div class="table-wrap"><table>
+<thead><tr class="group"><th></th><th></th><th colspan="2">Acceptance items</th><th colspan="2" class="num">Minutes</th><th colspan="2" class="num">Cost (USD)</th></tr>
+<tr class="sub"><th>Task</th><th>Library</th><th>Codex</th><th>Opus</th><th class="num">Codex</th><th class="num">Opus</th><th class="num">Codex</th><th class="num">Opus</th></tr></thead>
+<tbody>
+<tr><td>Booking</td><td>shadcn</td><td>17/17</td><td>17/17</td><td class="num">19</td><td class="num">19</td><td class="num">1.02</td><td class="num">3.66</td></tr>
+<tr><td>Booking</td><td>UI SDK</td><td><strong>16/17</strong></td><td>17/17</td><td class="num">15</td><td class="num">14</td><td class="num">0.95</td><td class="num">5.16</td></tr>
+<tr><td>Inbox</td><td>shadcn</td><td><strong>15/16</strong></td><td>16/16</td><td class="num">19</td><td class="num">15</td><td class="num">1.10</td><td class="num">3.31</td></tr>
+<tr><td>Inbox</td><td>UI SDK</td><td>16/16</td><td>16/16</td><td class="num">16</td><td class="num">18</td><td class="num">0.97</td><td class="num">6.30</td></tr>
+<tr><td>Spreadsheet</td><td>shadcn</td><td>15/15</td><td>15/15</td><td class="num">9</td><td class="num">7</td><td class="num">0.39</td><td class="num">1.53</td></tr>
+<tr><td>Spreadsheet</td><td>UI SDK</td><td>15/15</td><td>15/15</td><td class="num">16</td><td class="num">10</td><td class="num">0.82</td><td class="num">2.32</td></tr>
+<tr><td>Flow canvas</td><td>shadcn</td><td>16/16</td><td>16/16</td><td class="num">18</td><td class="num">20</td><td class="num">0.70</td><td class="num">4.44</td></tr>
+<tr><td>Flow canvas</td><td>UI SDK</td><td><strong>15/16</strong></td><td><strong>15/16</strong></td><td class="num">23</td><td class="num">22</td><td class="num">1.21</td><td class="num">5.98</td></tr>
+</tbody></table></div>
+<p>The four failed items are all real defects, three of them in UI SDK apps:</p>
+<ul>
+<li><strong>Booking, UI SDK, Codex (A12):</strong> the "Meeting created" toast isn't announced to screen readers.</li>
+<li><strong>Inbox, shadcn, Codex (A16):</strong> some light-mode text has 4.3:1 contrast, below the required 4.5:1.</li>
+<li><strong>Flow canvas, UI SDK, Codex (A6):</strong> the connect menu opens partly off-screen, so one target can't be clicked.</li>
+<li><strong>Flow canvas, UI SDK, Opus (A4):</strong> the agent named the menu "Add step", but UI SDK's Menu also takes the name of the button that opened it, and that name wins. Opened from "Insert step between …", the menu is announced under the button's name. A library default overriding an explicit label is worth fixing upstream.</li>
+</ul>
+<h3>Time and cost</h3>
+<p>Time tracked the model, not the library: about an hour per library for each model. Cost differs by model because of list prices.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Model</th><th>Library</th><th class="num">Total minutes</th><th class="num">Turns</th><th class="num">Cost (USD)</th></tr></thead>
+<tbody>
+<tr><td>Codex</td><td>shadcn</td><td class="num">65</td><td class="num">130</td><td class="num">3.21</td></tr>
+<tr><td>Codex</td><td>UI SDK</td><td class="num">69</td><td class="num">160</td><td class="num">3.95</td></tr>
+<tr><td>Opus</td><td>shadcn</td><td class="num">62</td><td class="num">185</td><td class="num">12.94</td></tr>
+<tr><td>Opus</td><td>UI SDK</td><td class="num">65</td><td class="num">297</td><td class="num">19.76</td></tr>
+</tbody></table></div>
+<p>Both agents ran on subscriptions, so these costs are what the same tokens would cost at API prices: computed from token counts for Codex, and reported by Claude Code for Opus. UI SDK runs cost more with both models (23% for Codex, 53% for Opus) and took more turns, within what one run per cell can show.</p>
+
+<h2 id="look-the-model-s-house-style">Look: the model's house style</h2>
+<p>Our prompt, rules and project notes say nothing about colour, fonts or brand. The specs only ask that everything look right and stay readable in light and dark mode, and the flow canvas adds that its design must be original. Both starters are neutral: shadcn's primary colour is near-black, and UI SDK's default look uses the text colour. Each model then made the same choices whichever library it had.</p>
+<figure><div class="shots-matrix"><div></div><div class="col-head"><span class="dot shadcn"></span>shadcn/ui</div><div class="col-head"><span class="dot ui-sdk"></span>UI SDK</div><div class="row-head">Codex · gpt-6.1-sol</div><a class="shot" href="runs/003704f316c8/index.html" aria-label="Issue triage inbox, shadcn/ui, Codex · gpt-6.1-sol"><picture><source srcset="runs/003704f316c8/screenshots/1280-dark.png" media="(prefers-color-scheme: dark)"><img loading="lazy" src="runs/003704f316c8/screenshots/1280-light.png" alt="Issue triage inbox built by Codex · gpt-6.1-sol with shadcn/ui"></picture></a><a class="shot" href="runs/1d1cfbe1bbd4/index.html" aria-label="Issue triage inbox, UI SDK, Codex · gpt-6.1-sol"><picture><source srcset="runs/1d1cfbe1bbd4/screenshots/1280-dark.png" media="(prefers-color-scheme: dark)"><img loading="lazy" src="runs/1d1cfbe1bbd4/screenshots/1280-light.png" alt="Issue triage inbox built by Codex · gpt-6.1-sol with UI SDK"></picture></a><div class="row-head">Claude Code · Opus 5.5</div><a class="shot" href="runs/8d6037a897a2/index.html" aria-label="Issue triage inbox, shadcn/ui, Claude Code · Opus 5.5"><picture><source srcset="runs/8d6037a897a2/screenshots/1280-dark.png" media="(prefers-color-scheme: dark)"><img loading="lazy" src="runs/8d6037a897a2/screenshots/1280-light.png" alt="Issue triage inbox built by Claude Code · Opus 5.5 with shadcn/ui"></picture></a><a class="shot" href="runs/e0724f6d201c/index.html" aria-label="Issue triage inbox, UI SDK, Claude Code · Opus 5.5"><picture><source srcset="runs/e0724f6d201c/screenshots/1280-dark.png" media="(prefers-color-scheme: dark)"><img loading="lazy" src="runs/e0724f6d201c/screenshots/1280-light.png" alt="Issue triage inbox built by Claude Code · Opus 5.5 with UI SDK"></picture></a></div><figcaption>The inbox from each model and library. Codex's two versions share one branded look; Opus's two share the stock look. Click any screenshot to open that app.</figcaption></figure>
+<div class="table-wrap"><table>
+<thead><tr><th></th><th>Codex</th><th>Opus</th></tr></thead>
+<tbody>
+<tr><td>Colour</td><td>Its own palette in every app; 7 of 8 dark green (for example #285a48, #277550), one blue-purple</td><td>None added: no hex colours at all, shadcn's near-black primary and UI SDK's default look kept</td></tr>
+<tr><td>Brand</td><td>An invented product name and logo in all 8 apps, usually the same per task in both libraries: "gather" for booking, "folio" for the spreadsheet</td><td>None; every page title was left as "App"</td></tr>
+<tr><td>Fonts</td><td>Three of four shadcn runs added a web font (Inter, DM Sans, Manrope)</td><td>None added</td></tr>
+<tr><td>Result</td><td>Each task looks like one product in both libraries</td><td>Each app shows its library's stock look, which makes the two libraries look closer still</td></tr>
+</tbody></table></div>
+<p>So the library changes the components underneath but not the visual direction; that comes from the model. Claude Code's built-in <code>design</code> skill was available to Opus but never used: in 7 of 8 runs it opened only the benchmark's shadcn or ui-sdk skill, and in the eighth neither.</p>
+<figure><div class="shots-matrix"><div></div><div class="col-head"><span class="dot shadcn"></span>shadcn/ui</div><div class="col-head"><span class="dot ui-sdk"></span>UI SDK</div><div class="row-head">Codex · gpt-6.1-sol</div><a class="shot" href="runs/4f6ce1cca144/index.html" aria-label="Meeting booking dialog, shadcn/ui, Codex · gpt-6.1-sol"><picture><source srcset="runs/4f6ce1cca144/screenshots/1280-dark.png" media="(prefers-color-scheme: dark)"><img loading="lazy" src="runs/4f6ce1cca144/screenshots/1280-light.png" alt="Meeting booking dialog built by Codex · gpt-6.1-sol with shadcn/ui"></picture></a><a class="shot" href="runs/ea2f5074f5bd/index.html" aria-label="Meeting booking dialog, UI SDK, Codex · gpt-6.1-sol"><picture><source srcset="runs/ea2f5074f5bd/screenshots/1280-dark.png" media="(prefers-color-scheme: dark)"><img loading="lazy" src="runs/ea2f5074f5bd/screenshots/1280-light.png" alt="Meeting booking dialog built by Codex · gpt-6.1-sol with UI SDK"></picture></a><div class="row-head">Claude Code · Opus 5.5</div><a class="shot" href="runs/4794ffa7376b/index.html" aria-label="Meeting booking dialog, shadcn/ui, Claude Code · Opus 5.5"><picture><source srcset="runs/4794ffa7376b/screenshots/1280-dark.png" media="(prefers-color-scheme: dark)"><img loading="lazy" src="runs/4794ffa7376b/screenshots/1280-light.png" alt="Meeting booking dialog built by Claude Code · Opus 5.5 with shadcn/ui"></picture></a><a class="shot" href="runs/a4461f83a016/index.html" aria-label="Meeting booking dialog, UI SDK, Claude Code · Opus 5.5"><picture><source srcset="runs/a4461f83a016/screenshots/1280-dark.png" media="(prefers-color-scheme: dark)"><img loading="lazy" src="runs/a4461f83a016/screenshots/1280-light.png" alt="Meeting booking dialog built by Claude Code · Opus 5.5 with UI SDK"></picture></a></div><figcaption>The booking page, which opens the meeting dialog, from each model and library.</figcaption></figure>
+
+<h2 id="accessibility">Accessibility</h2>
+<p>UI SDK apps had far fewer automated accessibility failures with both models, though the size of the gap depends mostly on the model's own styling.</p>
+<figure class="bars">
+<p class="bars-title">Failing axe checks, all four tasks</p>
+<p class="bars-sub">axe-core on 4 to 6 UI states per app; an element failing in several states counts once per state.</p>
+<div class="bar-row"><span class="bar-label"><span class="dot shadcn"></span>Codex · shadcn</span><span class="bar-track"><span class="bar shadcn" style="--v:100%"></span></span><span class="bar-value">684</span></div>
+<div class="bar-row"><span class="bar-label"><span class="dot ui-sdk"></span>Codex · UI SDK</span><span class="bar-track"><span class="bar ui-sdk" style="--v:7.9%"></span></span><span class="bar-value">54</span></div>
+<div class="bar-gap"></div>
+<div class="bar-row"><span class="bar-label"><span class="dot shadcn"></span>Opus · shadcn</span><span class="bar-track"><span class="bar shadcn" style="--v:8.5%"></span></span><span class="bar-value">58</span></div>
+<div class="bar-row"><span class="bar-label"><span class="dot ui-sdk"></span>Opus · UI SDK</span><span class="bar-track"><span class="bar ui-sdk" style="--v:2.2%"></span></span><span class="bar-value">15</span></div>
+</figure>
+<div class="table-wrap"><table>
+<thead><tr class="group"><th></th><th colspan="2" class="num">Codex</th><th colspan="2" class="num">Opus</th></tr>
+<tr class="sub"><th>Task</th><th class="num">shadcn</th><th class="num">UI SDK</th><th class="num">shadcn</th><th class="num">UI SDK</th></tr></thead>
+<tbody>
+<tr><td>Booking</td><td class="num">120</td><td class="num">17</td><td class="num">0*</td><td class="num">0</td></tr>
+<tr><td>Inbox</td><td class="num">361</td><td class="num">8</td><td class="num">13</td><td class="num">0</td></tr>
+<tr><td>Spreadsheet</td><td class="num">51</td><td class="num">0</td><td class="num">45</td><td class="num">0</td></tr>
+<tr><td>Flow canvas</td><td class="num">152</td><td class="num">29</td><td class="num">0</td><td class="num">15</td></tr>
+</tbody></table></div>
+<p class="muted small">*The Opus shadcn booking app failed 7 contrast checks on one of three passes, so that check is slightly flaky.</p>
+<ul>
+<li><strong>Most failures are colour contrast,</strong> on text the agents styled themselves, such as eyebrow labels and muted captions: 636 for Codex with shadcn, 16 with UI SDK; 57 for Opus with shadcn, none with UI SDK.</li>
+<li><strong>Codex's palette made the gap huge.</strong> Its shadcn inbox set muted text to #818780, about 3.6:1 on white. Opus kept the stock themes, so its shadcn apps were far cleaner, and its remaining shadcn failures are mostly the spreadsheet's muted text.</li>
+<li><strong>Other failures were few:</strong> disallowed ARIA attributes and focusable elements inside <code>aria-hidden</code> only in Codex's shadcn apps (15 checks), label mismatches in both of Codex's arms, and in Opus's UI SDK flow canvas, list items outside a list and touch targets under 24px.</li>
+</ul>
+
+<h2 id="components-library-or-hand-built">Components: library or hand-built</h2>
+<p>Both models used their library for standard controls and hand-built everything task-specific. The real difference is that UI SDK ships three widgets that shadcn runs wrote from scratch.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Task</th><th>Library</th><th>From the library</th><th>Built by hand</th></tr></thead>
+<tbody>
+<tr><td>Booking</td><td>shadcn</td><td>Dialog, AlertDialog, Popover, Select, RadioGroup, Field, Input, Button, Toast</td><td><strong>Calendar</strong> and <strong>attendee combobox</strong> with their own ARIA, in both models</td></tr>
+<tr><td>Booking</td><td>UI SDK</td><td>Dialog, AlertDialog, <strong>Combobox</strong> with chips, Select, Radio, Field; Codex used <strong>DatePicker</strong>, Opus <strong>Calendar</strong> in a Popover</td><td>Search state around the Combobox</td></tr>
+<tr><td>Inbox</td><td>shadcn</td><td>Codex: Tabs, Checkbox, DropdownMenu, ContextMenu, Sheet, Dialog, Popover. Opus: only basics such as Button, Input, Badge, Kbd and a native select</td><td><strong>Command palette</strong> in both; Opus also hand-built its menus, filter popover and drawer</td></tr>
+<tr><td>Inbox</td><td>UI SDK</td><td>Tabs, Checkbox, Menu with submenus, <strong>Command</strong>, Dialog, Popover, Select, Toolbar, in both models</td><td>Issue table, drawer and status displays</td></tr>
+<tr><td>Spreadsheet</td><td>shadcn</td><td>Button, Input; Codex also Field, Dialog, Tooltip</td><td>The grid with its keyboard and range logic, in both</td></tr>
+<tr><td>Spreadsheet</td><td>UI SDK</td><td>Button, Input; Codex also core <code>createGridFocus</code> and <code>createCellRange</code>, Opus only core's clipboard helpers</td><td>The grid: Codex as a primitive on UI SDK core, Opus in plain React</td></tr>
+<tr><td>Flow canvas</td><td>shadcn</td><td>Button, Input, Textarea, DropdownMenu, Tooltip, Field</td><td>The canvas with pan, zoom and drag, in both</td></tr>
+<tr><td>Flow canvas</td><td>UI SDK</td><td>Menu, Select, Toolbar, Field, Input, Textarea; Codex also core <code>createViewport</code></td><td>The canvas: Codex on core's viewport, Opus fully by hand</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>shadcn runs hand-built a calendar, a combobox and a command palette,</strong> each with its own ARIA roles, in both models. shadcn's registry has Calendar, Combobox and Command, but no agent added them or said why. Our rule against "a ready-made calendar/scheduler suite" may have steered them away from Calendar, which pulls in react-day-picker.</li>
+<li><strong>UI SDK core was optional.</strong> Codex built its spreadsheet grid and canvas on core's grid-focus, cell-range and viewport primitives; Opus hand-wrote them and still scored 15/15 and 15/16. Core neither made nor broke these tasks.</li>
+<li><strong>6 of 8 UI SDK runs added an agent bridge nobody asked for.</strong> Following the ui-sdk skill, they called <code>createAgent()</code> so an in-app AI agent could operate the components.</li>
+<li><strong>shadcn copies components into the project.</strong> Each shadcn run added between 4 and 17 component files through its CLI; UI SDK components stay in <code>node_modules</code>. UI SDK ships no icon set, so its runs drew inline SVG icons or added lucide-react.</li>
+</ul>
+
+<h2 id="did-ui-sdk-help">Did UI SDK help?</h2>
+<p>It helped with accessibility and spared the agents three hand-built widgets. It didn't help functional scores, and this experiment can't say whether its components or its agent guidance did the helping.</p>
+<ul>
+<li><strong>Accessibility: yes, with both models.</strong> Fewer contrast failures and almost no ARIA misuse.</li>
+<li><strong>Ready-made widgets: yes.</strong> DatePicker or Calendar, Combobox and Command replaced three ARIA widgets that shadcn runs wrote by hand.</li>
+<li><strong>Function: no room to show.</strong> Scores hit the ceiling in both libraries.</li>
+<li><strong>Effort: no.</strong> UI SDK runs took the same time and cost somewhat more with both models.</li>
+<li><strong>Core: optional.</strong> Useful to Codex, unused by Opus, and both succeeded.</li>
+</ul>
+<p>Why we can't credit the components alone:</p>
+<ul>
+<li><strong>The skill is the likelier cause of the contrast gap.</strong> The ui-sdk skill's styling reference states the 4.5:1 rule and says to check contrast in a real browser; one Codex run added axe to its own tests. The shadcn skill raises contrast only when building a design-system page.</li>
+<li><strong>Library and skill were tested together,</strong> as each vendor ships them. Separating them needs an arm with UI SDK but no skill, or shadcn with equivalent guidance.</li>
+</ul>
+<div class="callout"><p><strong>Verdict:</strong> indicative for accessibility, not for function. The help likely comes from UI SDK's agent guidance at least as much as from its components, and the visual result comes from the model.</p></div>
+
+<h2 id="test-fixes-and-validity">Test fixes and validity</h2>
+<p>The first scores undercounted both libraries: most early failures came from our acceptance tests, not the agents' apps. Codex's runs first scored 49 of 64 with shadcn and 51 with UI SDK; after the fixes, 63 and 62. The Opus runs surfaced four more test problems, and re-checking Codex with those fixes changed none of its scores.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Problem in our tests</th><th>Example</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td>Timing races</td><td>Read the focused calendar day right after Enter; read a list while the previous one was still closing; pressed keys faster than a person would</td><td>Poll for focus and state; wait for popups to close; press keys at human speed</td></tr>
+<tr><td>Matching the wrong element</td><td>"December 2026" also matched the meeting list; "Meetings" matched "Upcoming meetings"</td><td>Scope to the right region; use exact names</td></tr>
+<tr><td>Assumptions the spec doesn't make</td><td>Nothing selected on load; every node visible on load; "Zoom in" still clickable at the 200% maximum</td><td>Test only what the spec states</td></tr>
+<tr><td>Penalising a valid pattern</td><td>A filled primary button failed a "light background" check; a mirrored live region didn't count as announced</td><td>Check contrast only where it applies; accept either announcement pattern</td></tr>
+<tr><td>Entering text unlike a user</td><td><code>fill()</code> raced a combobox that resets on focus</td><td>Type the query key by key</td></tr>
+</tbody></table></div>
+<p>Each fixed suite gave the same result over repeated runs, every suite still fails cleanly on the empty starter templates, and the helper self-check passes. The main caveat: the tests were corrected while looking at these outputs. Every fix follows the written spec and applies to both libraries, but scores on fresh runs will be cleaner evidence.</p>
+
+<h2 id="limitations-and-next-steps">Limitations and next steps</h2>
+<p>The pilots show the harness works and point at one lead, but they can't rank the libraries.</p>
+<ul>
+<li><strong>One run per cell.</strong> Run-to-run variation is as large as the gaps between libraries.</li>
+<li><strong>Library and skill are bundled.</strong> Each arm is the vendor's package as shipped, so component effects and guidance effects can't be told apart.</li>
+<li><strong>The spec is very precise.</strong> It names every role, accessible name and key binding, and the agents tested against it, which pushes both libraries to the ceiling.</li>
+<li><strong>Visual quality is unjudged.</strong> We describe how the apps look but haven't rated them.</li>
+</ul>
+<p>Next steps, in order:</p>
+<ol>
+<li>Add an arm with UI SDK but no skill, to separate the components from the guidance.</li>
+<li>Make the benchmark discriminate: score accessibility and keyboard behaviour as headline metrics, and try specs that state outcomes without spelling out the ARIA contract.</li>
+<li>Add repetitions on the tasks that showed a gap.</li>
+<li>Have independent reviewers rate the apps' visual quality.</li>
+</ol></article></div></div></main>
+<footer><div class="container"><span>UI SDK vs shadcn: a coding-agent UI benchmark, November 2026.</span><span>Run data: <a href="data/runs.json">runs.json</a></span></div></footer><script>(()=>{const links=[...document.querySelectorAll('.toc a')];const heads=links.map(a=>document.getElementById(a.hash.slice(1))).filter(Boolean);
+if(!('IntersectionObserver'in window)||!heads.length)return;const on=new Set();const set=()=>{const first=heads.find(h=>on.has(h));if(!first)return;links.forEach(a=>a.classList.toggle('active',a.hash==='#'+first.id))};
+const io=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?on.add(e.target):on.delete(e.target));set()},{rootMargin:'-80px 0px -65% 0px'});heads.forEach(h=>io.observe(h))})()</script></body></html>

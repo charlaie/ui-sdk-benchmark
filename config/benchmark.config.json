@@ -1,0 +1,48 @@
+{
+  "$comment": "Main benchmark config. Values set to null are deliberately unset: the runner refuses to start a real run until you fill them in. See README.md.",
+  "repetitions": 1,
+  "arms": ["shadcn", "ui-sdk"],
+  "tasks": ["01-booking", "02-inbox", "03-spreadsheet", "04-flow-canvas"],
+  "agents": {
+    "claude": {
+      "kind": "claude-code",
+      "binary": "~/.local/share/claude/versions/2.1.325",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "$effortComment": "Passed as --effort. Must be set explicitly (for example \"high\"); never left to the CLI default."
+    },
+    "codex": {
+      "kind": "codex",
+      "releaseDir": "~/.codex/packages/standalone/releases/0.169.0-x86_64-unknown-linux-musl",
+      "model": "gpt-6.1-sol",
+      "$modelComment": "Candidates on this machine: gpt-6.1-sol, gpt-6.1-terra. Must be set explicitly.",
+      "effort": "high",
+      "$effortComment": "Passed as -c model_reasoning_effort=<effort>. Must be set explicitly.",
+      "disableFeatures": ["apps", "plugins", "remote_plugin", "plugin_sharing", "browser_use", "browser_use_external", "computer_use", "in_app_browser", "memories"],
+      "$disableFeaturesComment": "Isolation: keeps the account's ChatGPT apps/connectors, remote plugins, memories and browser/computer use out of the run. Claude Code gets no browser either."
+    }
+  },
+  "limits": {
+    "budgetUsd": null,
+    "$budgetComment": "Per-run cost cap in USD, or null for no cap (fine on subscriptions: cost is still computed and recorded, and runs stopped by a usage limit can be resumed). Claude Code enforces it with --max-budget-usd; for Codex the runner computes cost from the live rollout token records and kills the run when it is exceeded.",
+    "timeoutMinutes": 60,
+    "$timeoutComment": "Per-run wall-clock timeout for the agent process."
+  },
+  "pricing": {
+    "$comment": "USD per 1M tokens, used only for Codex (Claude Code reports its own total_cost_usd). Standard tier from https://developers.openai.com/api/docs/pricing, read 2026-11-15. input_tokens include cached tokens; output_tokens include reasoning tokens. Requests whose input exceeds longContextThreshold are priced at the long-context rates. Re-check before a real run.",
+    "gpt-6.1-sol": { "input": 2.0, "cachedInput": 0.1, "output": 10.0, "longContextThreshold": 272000, "longInput": 4.0, "longCachedInput": 0.2, "longOutput": 15.0 },
+    "gpt-6.1-terra": { "input": 1.0, "cachedInput": 0.05, "output": 5.0, "longContextThreshold": 272000, "longInput": 2.0, "longCachedInput": 0.1, "longOutput": 7.5 }
+  },
+  "isolation": "docker",
+  "$isolationComment": "docker (preferred): the agent runs in ui-sdk-bench-agent:local with only its workspace and an isolated home mounted. host: the agent runs directly with an isolated HOME / CLAUDE_CONFIG_DIR / CODEX_HOME, but can still read the rest of the filesystem.",
+  "docker": { "image": "ui-sdk-bench-agent:local", "cpus": 4, "memory": "8g" },
+  "auth": {
+    "mode": "copy-credentials",
+    "$comment": "copy-credentials: copy ~/.claude/.credentials.json and ~/.codex/auth.json into each run's isolated home, and copy a refreshed token back afterwards if the original is unchanged. env: pass through the variables listed in passEnv instead (for example ANTHROPIC_API_KEY, OPENAI_API_KEY).",
+    "passEnv": []
+  },
+  "workRoot": null,
+  "$workRootComment": "Where agent workspaces live during a run (default: <os tmpdir>/ui-sdk-bench-work). Kept outside the repo so the hidden tests are never next to a workspace.",
+  "runsDir": "runs",
+  "seed": 20261115
+}

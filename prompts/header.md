@@ -1,0 +1,1 @@
+You are working in a frontend project in the current directory. Complete the task below on your own in this one session: nobody will answer questions or give feedback, so make reasonable decisions and finish. When you are done, the project must build with `npm run build`.

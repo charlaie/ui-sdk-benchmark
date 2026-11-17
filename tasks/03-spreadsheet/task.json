@@ -1,0 +1,23 @@
+{
+  "id": "03-spreadsheet",
+  "title": "Spreadsheet grid",
+  "category": "new-behavior",
+  "mock": "mock",
+  "bannedDependencies": [
+    "ag-grid-*",
+    "@ag-grid-community/*",
+    "react-data-grid",
+    "@mui/x-data-grid*",
+    "@glideapps/glide-data-grid",
+    "handsontable",
+    "@handsontable/*",
+    "react-spreadsheet",
+    "jspreadsheet*",
+    "x-data-spreadsheet",
+    "@fortune-sheet/*",
+    "luckysheet",
+    "@univerjs/*",
+    "revogrid",
+    "@revolist/*"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "04-flow-canvas",
+  "title": "Agent flow canvas",
+  "category": "new-behavior",
+  "mock": "mock",
+  "bannedDependencies": [
+    "reactflow",
+    "react-flow-renderer",
+    "@xyflow/*",
+    "@projectstorm/*",
+    "rete",
+    "rete-*",
+    "@joint/*",
+    "jointjs",
+    "gojs",
+    "drawflow",
+    "litegraph.js",
+    "cytoscape",
+    "react-cytoscapejs",
+    "@antv/x6*",
+    "@antv/g6*",
+    "@logicflow/*",
+    "beautiful-react-diagrams"
+  ]
+}

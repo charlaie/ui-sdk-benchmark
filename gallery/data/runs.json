@@ -1,0 +1,3266 @@
+[
+  {
+    "id": "4f6ce1cca144",
+    "runId": "01-booking__shadcn__codex__r1",
+    "task": "01-booking",
+    "taskTitle": "Meeting booking dialog",
+    "category": "composition",
+    "arm": "shadcn",
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "0.169.0",
+    "libraryVersions": {
+      "shadcn": "4.23.0",
+      "@base-ui/react": "1.9.0",
+      "lucide-react": "1.73.0"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-15T20:55:02.251Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 1.0179248,
+      "source": "computed from rollout token records and config pricing"
+    },
+    "tokens": {
+      "input": 89956,
+      "cacheRead": 3820928,
+      "cacheWrite": 0,
+      "output": 45592,
+      "reasoning": 9106,
+      "total": 3956476
+    },
+    "time": {
+      "wallMs": 1137794,
+      "agentWallMs": 1136968,
+      "modelMs": 662634,
+      "toolMs": 474334,
+      "modelTimeSource": "wall clock minus tool time (codex reports no API duration)"
+    },
+    "process": {
+      "turns": 41,
+      "assistantMessages": 6,
+      "subagentsSpawned": 0,
+      "toolCalls": 58,
+      "toolCallsByKind": {
+        "shell": 58
+      },
+      "docs": {
+        "calls": 5,
+        "outputChars": 29538,
+        "timeMs": 8474,
+        "librarySourceCalls": 5
+      },
+      "builds": {
+        "runs": 4,
+        "failures": 0
+      },
+      "installs": 2,
+      "testRuns": 18,
+      "failedToolCalls": 12,
+      "toolTimeMs": 474334
+    },
+    "skills": {
+      "available": [
+        "imagegen",
+        "openai-docs",
+        "skill-creator",
+        "skill-installer",
+        "shadcn"
+      ],
+      "benchmarkSkillAvailable": true,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 10,
+        "rawBytes": 741423,
+        "gzipBytes": 181958,
+        "jsGzipBytes": 157672,
+        "cssGzipBytes": 23932
+      },
+      "dependencies": {
+        "added": [
+          {
+            "name": "@fontsource-variable/dm-sans",
+            "version": "^5.3.0",
+            "dev": false
+          },
+          {
+            "name": "@fontsource-variable/manrope",
+            "version": "^5.3.0",
+            "dev": false
+          },
+          {
+            "name": "@playwright/test",
+            "version": "^1.65.1",
+            "dev": true
+          }
+        ],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 24,
+        "linesAdded": 2665,
+        "linesRemoved": 10,
+        "codeLinesAdded": 2650
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 17,
+        "itemsTotal": 17,
+        "testsPassed": 20,
+        "testsTotal": 22,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true,
+          "A16": true,
+          "A17": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 0,
+        "statesChecked": 6,
+        "violations": 13,
+        "byImpact": {
+          "critical": 5,
+          "serious": 8
+        },
+        "rules": [
+          "aria-allowed-attr",
+          "color-contrast",
+          "scrollable-region-focusable",
+          "label-content-name-mismatch"
+        ]
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 120
+    }
+  },
+  {
+    "id": "ea2f5074f5bd",
+    "runId": "01-booking__ui-sdk__codex__r1",
+    "task": "01-booking",
+    "taskTitle": "Meeting booking dialog",
+    "category": "composition",
+    "arm": "ui-sdk",
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "0.169.0",
+    "libraryVersions": {
+      "@ui-sdk/core": "0.1.0-beta.5",
+      "@ui-sdk/react": "0.1.0-beta.5"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-15T21:14:33.382Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 0.9460468000000001,
+      "source": "computed from rollout token records and config pricing"
+    },
+    "tokens": {
+      "input": 99215,
+      "cacheRead": 3984768,
+      "cacheWrite": 0,
+      "output": 34914,
+      "reasoning": 6823,
+      "total": 4118897
+    },
+    "time": {
+      "wallMs": 891743,
+      "agentWallMs": 891068,
+      "modelMs": 736460,
+      "toolMs": 154608,
+      "modelTimeSource": "wall clock minus tool time (codex reports no API duration)"
+    },
+    "process": {
+      "turns": 42,
+      "assistantMessages": 7,
+      "subagentsSpawned": 0,
+      "toolCalls": 50,
+      "toolCallsByKind": {
+        "shell": 50
+      },
+      "docs": {
+        "calls": 12,
+        "outputChars": 453347,
+        "timeMs": 23,
+        "librarySourceCalls": 0
+      },
+      "builds": {
+        "runs": 5,
+        "failures": 1
+      },
+      "installs": 1,
+      "testRuns": 21,
+      "failedToolCalls": 13,
+      "toolTimeMs": 154608
+    },
+    "skills": {
+      "available": [
+        "imagegen",
+        "openai-docs",
+        "skill-creator",
+        "skill-installer",
+        "ui-sdk"
+      ],
+      "benchmarkSkillAvailable": true,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 4,
+        "rawBytes": 587518,
+        "gzipBytes": 188211,
+        "jsGzipBytes": 179357,
+        "cssGzipBytes": 8559
+      },
+      "dependencies": {
+        "added": [
+          {
+            "name": "lucide-react",
+            "version": "^1.73.0",
+            "dev": false
+          },
+          {
+            "name": "@playwright/test",
+            "version": "^1.65.1",
+            "dev": true
+          },
+          {
+            "name": "@testing-library/react",
+            "version": "^16.3.3",
+            "dev": true
+          },
+          {
+            "name": "@testing-library/user-event",
+            "version": "^14.6.10",
+            "dev": true
+          },
+          {
+            "name": "jsdom",
+            "version": "^31.0.1",
+            "dev": true
+          },
+          {
+            "name": "vitest",
+            "version": "^5.1.0",
+            "dev": true
+          }
+        ],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 11,
+        "linesAdded": 3736,
+        "linesRemoved": 10,
+        "codeLinesAdded": 3717
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 16,
+        "itemsTotal": 17,
+        "testsPassed": 20,
+        "testsTotal": 22,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": false,
+          "A13": true,
+          "A14": true,
+          "A15": true,
+          "A16": true,
+          "A17": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 1,
+        "statesChecked": 6,
+        "violations": 2,
+        "byImpact": {
+          "serious": 2
+        },
+        "rules": [
+          "label-content-name-mismatch",
+          "color-contrast"
+        ]
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 17
+    }
+  },
+  {
+    "id": "4794ffa7376b",
+    "runId": "01-booking__shadcn__claude__r1",
+    "task": "01-booking",
+    "taskTitle": "Meeting booking dialog",
+    "category": "composition",
+    "arm": "shadcn",
+    "agent": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "2.1.325",
+    "libraryVersions": {
+      "shadcn": "4.23.0",
+      "@base-ui/react": "1.9.0",
+      "lucide-react": "1.73.0"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-17T01:20:23.889Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 3.6645324,
+      "source": "claude-code total_cost_usd"
+    },
+    "tokens": {
+      "input": 118,
+      "cacheRead": 5960382,
+      "cacheWrite": 142388,
+      "output": 66644,
+      "reasoning": 25042,
+      "total": 6169532
+    },
+    "time": {
+      "wallMs": 1163793,
+      "agentWallMs": 1162678,
+      "modelMs": 660261,
+      "toolMs": 502415,
+      "modelTimeSource": "claude-code duration_api_ms"
+    },
+    "process": {
+      "turns": 63,
+      "assistantMessages": 58,
+      "subagentMessages": 0,
+      "subagentsSpawned": 0,
+      "toolCalls": 61,
+      "toolCallsByKind": {
+        "shell": 48,
+        "skill": 1,
+        "write": 6,
+        "read": 6
+      },
+      "docs": {
+        "calls": 1,
+        "outputChars": 23,
+        "timeMs": 7026,
+        "librarySourceCalls": 7
+      },
+      "builds": {
+        "runs": 9,
+        "failures": 1
+      },
+      "installs": 2,
+      "testRuns": 15,
+      "failedToolCalls": 5,
+      "toolTimeMs": 502415
+    },
+    "skills": {
+      "available": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator",
+        "plugin-authoring"
+      ],
+      "benchmarkSkillAvailable": null,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 3,
+        "rawBytes": 567909,
+        "gzipBytes": 170003,
+        "jsGzipBytes": 156272,
+        "cssGzipBytes": 13468
+      },
+      "dependencies": {
+        "added": [],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 23,
+        "linesAdded": 3075,
+        "linesRemoved": 4,
+        "codeLinesAdded": 3075
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 17,
+        "itemsTotal": 17,
+        "testsPassed": 22,
+        "testsTotal": 22,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true,
+          "A16": true,
+          "A17": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 2,
+        "statesChecked": 6,
+        "violations": 0,
+        "byImpact": {},
+        "rules": []
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 0
+    }
+  },
+  {
+    "id": "a4461f83a016",
+    "runId": "01-booking__ui-sdk__claude__r1",
+    "task": "01-booking",
+    "taskTitle": "Meeting booking dialog",
+    "category": "composition",
+    "arm": "ui-sdk",
+    "agent": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "2.1.325",
+    "libraryVersions": {
+      "@ui-sdk/core": "0.1.0-beta.5",
+      "@ui-sdk/react": "0.1.0-beta.5"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-17T01:40:21.889Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 5.156012400000002,
+      "source": "claude-code total_cost_usd"
+    },
+    "tokens": {
+      "input": 142,
+      "cacheRead": 10801322,
+      "cacheWrite": 224680,
+      "output": 59887,
+      "reasoning": 20783,
+      "total": 11086031
+    },
+    "time": {
+      "wallMs": 827697,
+      "agentWallMs": 826439,
+      "modelMs": 653466,
+      "toolMs": 172848,
+      "modelTimeSource": "claude-code duration_api_ms"
+    },
+    "process": {
+      "turns": 79,
+      "assistantMessages": 70,
+      "subagentMessages": 0,
+      "subagentsSpawned": 0,
+      "toolCalls": 77,
+      "toolCallsByKind": {
+        "skill": 1,
+        "shell": 62,
+        "read": 9,
+        "write": 5
+      },
+      "docs": {
+        "calls": 11,
+        "outputChars": 57926,
+        "timeMs": 4949,
+        "librarySourceCalls": 5
+      },
+      "builds": {
+        "runs": 4,
+        "failures": 0
+      },
+      "installs": 2,
+      "testRuns": 17,
+      "failedToolCalls": 5,
+      "toolTimeMs": 172848
+    },
+    "skills": {
+      "available": [
+        "ui-sdk",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator",
+        "plugin-authoring"
+      ],
+      "benchmarkSkillAvailable": true,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 4,
+        "rawBytes": 610913,
+        "gzipBytes": 179668,
+        "jsGzipBytes": 164918,
+        "cssGzipBytes": 14489
+      },
+      "dependencies": {
+        "added": [
+          {
+            "name": "@testing-library/dom",
+            "version": "^10.4.2",
+            "dev": true
+          },
+          {
+            "name": "@testing-library/react",
+            "version": "^16.3.3",
+            "dev": true
+          },
+          {
+            "name": "jsdom",
+            "version": "^31.0.1",
+            "dev": true
+          },
+          {
+            "name": "vitest",
+            "version": "^5.1.0",
+            "dev": true
+          }
+        ],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 15,
+        "linesAdded": 1247,
+        "linesRemoved": 6,
+        "codeLinesAdded": 1240
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 17,
+        "itemsTotal": 17,
+        "testsPassed": 22,
+        "testsTotal": 22,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true,
+          "A16": true,
+          "A17": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 2,
+        "statesChecked": 6,
+        "violations": 0,
+        "byImpact": {},
+        "rules": []
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 0
+    }
+  },
+  {
+    "id": "003704f316c8",
+    "runId": "02-inbox__shadcn__codex__r1",
+    "task": "02-inbox",
+    "taskTitle": "Issue triage inbox",
+    "category": "composition",
+    "arm": "shadcn",
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "0.169.0",
+    "libraryVersions": {
+      "shadcn": "4.23.0",
+      "@base-ui/react": "1.9.0",
+      "lucide-react": "1.73.0"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-15T18:31:09.185Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 1.0993515999999999,
+      "source": "computed from rollout token records and config pricing"
+    },
+    "tokens": {
+      "input": 96847,
+      "cacheRead": 4968576,
+      "cacheWrite": 0,
+      "output": 40880,
+      "reasoning": 7948,
+      "total": 5106303
+    },
+    "time": {
+      "wallMs": 1132814,
+      "agentWallMs": 1132032,
+      "modelMs": 868849,
+      "toolMs": 263183,
+      "modelTimeSource": "wall clock minus tool time (codex reports no API duration)"
+    },
+    "process": {
+      "turns": 50,
+      "assistantMessages": 8,
+      "subagentsSpawned": 0,
+      "toolCalls": 46,
+      "toolCallsByKind": {
+        "shell": 46
+      },
+      "docs": {
+        "calls": 4,
+        "outputChars": 135911,
+        "timeMs": 6602,
+        "librarySourceCalls": 6
+      },
+      "builds": {
+        "runs": 3,
+        "failures": 1
+      },
+      "installs": 2,
+      "testRuns": 12,
+      "failedToolCalls": 14,
+      "toolTimeMs": 263183
+    },
+    "skills": {
+      "available": [
+        "imagegen",
+        "openai-docs",
+        "skill-creator",
+        "skill-installer",
+        "shadcn"
+      ],
+      "benchmarkSkillAvailable": true,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 11,
+        "rawBytes": 821821,
+        "gzipBytes": 174862,
+        "jsGzipBytes": 155556,
+        "cssGzipBytes": 18780
+      },
+      "dependencies": {
+        "added": [
+          {
+            "name": "@fontsource-variable/inter",
+            "version": "^5.3.0",
+            "dev": false
+          },
+          {
+            "name": "@playwright/test",
+            "version": "^1.65.1",
+            "dev": true
+          }
+        ],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 26,
+        "linesAdded": 5639,
+        "linesRemoved": 126,
+        "codeLinesAdded": 5624
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 15,
+        "itemsTotal": 16,
+        "testsPassed": 19,
+        "testsTotal": 22,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true,
+          "A16": false
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 0,
+        "statesChecked": 6,
+        "violations": 10,
+        "byImpact": {
+          "serious": 10
+        },
+        "rules": [
+          "color-contrast",
+          "aria-prohibited-attr"
+        ]
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 361
+    }
+  },
+  {
+    "id": "1d1cfbe1bbd4",
+    "runId": "02-inbox__ui-sdk__codex__r1",
+    "task": "02-inbox",
+    "taskTitle": "Issue triage inbox",
+    "category": "composition",
+    "arm": "ui-sdk",
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "0.169.0",
+    "libraryVersions": {
+      "@ui-sdk/core": "0.1.0-beta.5",
+      "@ui-sdk/react": "0.1.0-beta.5"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-15T17:39:34.924Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 0.9732036000000001,
+      "source": "computed from rollout token records and config pricing"
+    },
+    "tokens": {
+      "input": 138155,
+      "cacheRead": 3156736,
+      "cacheWrite": 0,
+      "output": 38122,
+      "reasoning": 6678,
+      "total": 3333013
+    },
+    "time": {
+      "wallMs": 982852,
+      "agentWallMs": 982168,
+      "modelMs": 826372,
+      "toolMs": 155796,
+      "modelTimeSource": "wall clock minus tool time (codex reports no API duration)"
+    },
+    "process": {
+      "turns": 32,
+      "assistantMessages": 7,
+      "subagentsSpawned": 0,
+      "toolCalls": 38,
+      "toolCallsByKind": {
+        "shell": 38
+      },
+      "docs": {
+        "calls": 8,
+        "outputChars": 549435,
+        "timeMs": 20,
+        "librarySourceCalls": 1
+      },
+      "builds": {
+        "runs": 3,
+        "failures": 0
+      },
+      "installs": 2,
+      "testRuns": 16,
+      "failedToolCalls": 8,
+      "toolTimeMs": 155796
+    },
+    "skills": {
+      "available": [
+        "imagegen",
+        "openai-docs",
+        "skill-creator",
+        "skill-installer",
+        "ui-sdk"
+      ],
+      "benchmarkSkillAvailable": true,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 4,
+        "rawBytes": 585497,
+        "gzipBytes": 185437,
+        "jsGzipBytes": 176386,
+        "cssGzipBytes": 8778
+      },
+      "dependencies": {
+        "added": [
+          {
+            "name": "@axe-core/playwright",
+            "version": "^4.14.0",
+            "dev": true
+          },
+          {
+            "name": "@playwright/test",
+            "version": "^1.65.1",
+            "dev": true
+          }
+        ],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 9,
+        "linesAdded": 4433,
+        "linesRemoved": 9,
+        "codeLinesAdded": 4421
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 16,
+        "itemsTotal": 16,
+        "testsPassed": 20,
+        "testsTotal": 22,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true,
+          "A16": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 0,
+        "statesChecked": 6,
+        "violations": 4,
+        "byImpact": {
+          "serious": 4
+        },
+        "rules": [
+          "label-content-name-mismatch"
+        ]
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 8
+    }
+  },
+  {
+    "id": "8d6037a897a2",
+    "runId": "02-inbox__shadcn__claude__r1",
+    "task": "02-inbox",
+    "taskTitle": "Issue triage inbox",
+    "category": "composition",
+    "arm": "shadcn",
+    "agent": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "2.1.325",
+    "libraryVersions": {
+      "shadcn": "4.23.0",
+      "@base-ui/react": "1.9.0",
+      "lucide-react": "1.73.0"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-16T21:01:00.919Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 3.3134282,
+      "source": "claude-code total_cost_usd"
+    },
+    "tokens": {
+      "input": 70,
+      "cacheRead": 3113381,
+      "cacheWrite": 122759,
+      "output": 85420,
+      "reasoning": 38948,
+      "total": 3321630
+    },
+    "time": {
+      "wallMs": 907089,
+      "agentWallMs": 905834,
+      "modelMs": 783472,
+      "toolMs": 121966,
+      "modelTimeSource": "claude-code duration_api_ms"
+    },
+    "process": {
+      "turns": 45,
+      "assistantMessages": 35,
+      "subagentMessages": 0,
+      "subagentsSpawned": 0,
+      "toolCalls": 44,
+      "toolCallsByKind": {
+        "shell": 23,
+        "write": 8,
+        "edit": 5,
+        "read": 8
+      },
+      "docs": {
+        "calls": 1,
+        "outputChars": 10054,
+        "timeMs": 38,
+        "librarySourceCalls": 0
+      },
+      "builds": {
+        "runs": 4,
+        "failures": 1
+      },
+      "installs": 2,
+      "testRuns": 7,
+      "failedToolCalls": 2,
+      "toolTimeMs": 121966
+    },
+    "skills": {
+      "available": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator",
+        "plugin-authoring"
+      ],
+      "benchmarkSkillAvailable": null,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 3,
+        "rawBytes": 373589,
+        "gzipBytes": 111118,
+        "jsGzipBytes": 100752,
+        "cssGzipBytes": 10104
+      },
+      "dependencies": {
+        "added": [],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 16,
+        "linesAdded": 2290,
+        "linesRemoved": 4,
+        "codeLinesAdded": 2290
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 16,
+        "itemsTotal": 16,
+        "testsPassed": 21,
+        "testsTotal": 22,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true,
+          "A16": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 1,
+        "statesChecked": 6,
+        "violations": 4,
+        "byImpact": {
+          "serious": 4
+        },
+        "rules": [
+          "color-contrast",
+          "scrollable-region-focusable"
+        ]
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 13
+    }
+  },
+  {
+    "id": "e0724f6d201c",
+    "runId": "02-inbox__ui-sdk__claude__r1",
+    "task": "02-inbox",
+    "taskTitle": "Issue triage inbox",
+    "category": "composition",
+    "arm": "ui-sdk",
+    "agent": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "2.1.325",
+    "libraryVersions": {
+      "@ui-sdk/core": "0.1.0-beta.5",
+      "@ui-sdk/react": "0.1.0-beta.5"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-16T16:15:20.331Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 6.300793599999999,
+      "source": "claude-code total_cost_usd"
+    },
+    "tokens": {
+      "input": 164,
+      "cacheRead": 14221188,
+      "cacheWrite": 244125,
+      "output": 75145,
+      "reasoning": 24805,
+      "total": 14540622
+    },
+    "time": {
+      "wallMs": 1102174,
+      "agentWallMs": 1100811,
+      "modelMs": 809316,
+      "toolMs": 291794,
+      "modelTimeSource": "claude-code duration_api_ms"
+    },
+    "process": {
+      "turns": 94,
+      "assistantMessages": 81,
+      "subagentMessages": 0,
+      "subagentsSpawned": 0,
+      "toolCalls": 92,
+      "toolCallsByKind": {
+        "skill": 1,
+        "shell": 61,
+        "read": 18,
+        "write": 12
+      },
+      "docs": {
+        "calls": 19,
+        "outputChars": 268083,
+        "timeMs": 5403,
+        "librarySourceCalls": 7
+      },
+      "builds": {
+        "runs": 11,
+        "failures": 2
+      },
+      "installs": 2,
+      "testRuns": 18,
+      "failedToolCalls": 4,
+      "toolTimeMs": 291794
+    },
+    "skills": {
+      "available": [
+        "ui-sdk",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator",
+        "plugin-authoring"
+      ],
+      "benchmarkSkillAvailable": true,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 4,
+        "rawBytes": 650796,
+        "gzipBytes": 189287,
+        "jsGzipBytes": 173099,
+        "cssGzipBytes": 15927
+      },
+      "dependencies": {
+        "added": [
+          {
+            "name": "@testing-library/dom",
+            "version": "^10.4.2",
+            "dev": true
+          },
+          {
+            "name": "@testing-library/react",
+            "version": "^16.3.3",
+            "dev": true
+          },
+          {
+            "name": "jsdom",
+            "version": "^31.0.1",
+            "dev": true
+          },
+          {
+            "name": "playwright",
+            "version": "^1.65.1",
+            "dev": true
+          },
+          {
+            "name": "vitest",
+            "version": "^5.1.0",
+            "dev": true
+          }
+        ],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 17,
+        "linesAdded": 1807,
+        "linesRemoved": 5,
+        "codeLinesAdded": 1478
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 16,
+        "itemsTotal": 16,
+        "testsPassed": 22,
+        "testsTotal": 22,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true,
+          "A16": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 2,
+        "statesChecked": 6,
+        "violations": 0,
+        "byImpact": {},
+        "rules": []
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 0
+    }
+  },
+  {
+    "id": "5644c82847e4",
+    "runId": "03-spreadsheet__shadcn__codex__r1",
+    "task": "03-spreadsheet",
+    "taskTitle": "Spreadsheet grid",
+    "category": "new-behavior",
+    "arm": "shadcn",
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "0.169.0",
+    "libraryVersions": {
+      "shadcn": "4.23.0",
+      "@base-ui/react": "1.9.0",
+      "lucide-react": "1.73.0"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-15T17:29:52.993Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 0.3946432000000001,
+      "source": "computed from rollout token records and config pricing"
+    },
+    "tokens": {
+      "input": 50365,
+      "cacheRead": 805632,
+      "cacheWrite": 0,
+      "output": 21335,
+      "reasoning": 2813,
+      "total": 877332
+    },
+    "time": {
+      "wallMs": 550211,
+      "agentWallMs": 549302,
+      "modelMs": 478143,
+      "toolMs": 71159,
+      "modelTimeSource": "wall clock minus tool time (codex reports no API duration)"
+    },
+    "process": {
+      "turns": 15,
+      "assistantMessages": 5,
+      "subagentsSpawned": 0,
+      "toolCalls": 25,
+      "toolCallsByKind": {
+        "shell": 23,
+        "edit": 2
+      },
+      "docs": {
+        "calls": 4,
+        "outputChars": 39520,
+        "timeMs": 7178,
+        "librarySourceCalls": 0
+      },
+      "builds": {
+        "runs": 3,
+        "failures": 0
+      },
+      "installs": 2,
+      "testRuns": 8,
+      "failedToolCalls": 4,
+      "toolTimeMs": 71159
+    },
+    "skills": {
+      "available": [
+        "imagegen",
+        "openai-docs",
+        "skill-creator",
+        "skill-installer",
+        "shadcn"
+      ],
+      "benchmarkSkillAvailable": true,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 3,
+        "rawBytes": 474415,
+        "gzipBytes": 143111,
+        "jsGzipBytes": 129605,
+        "cssGzipBytes": 13148
+      },
+      "dependencies": {
+        "added": [
+          {
+            "name": "@playwright/test",
+            "version": "^1.65.1",
+            "dev": true
+          }
+        ],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 18,
+        "linesAdded": 1602,
+        "linesRemoved": 7,
+        "codeLinesAdded": 1591
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 15,
+        "itemsTotal": 15,
+        "testsPassed": 19,
+        "testsTotal": 20,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 1,
+        "statesChecked": 4,
+        "violations": 3,
+        "byImpact": {
+          "serious": 3
+        },
+        "rules": [
+          "color-contrast"
+        ]
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 51
+    }
+  },
+  {
+    "id": "91b755d28956",
+    "runId": "03-spreadsheet__ui-sdk__codex__r1",
+    "task": "03-spreadsheet",
+    "taskTitle": "Spreadsheet grid",
+    "category": "new-behavior",
+    "arm": "ui-sdk",
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "0.169.0",
+    "libraryVersions": {
+      "@ui-sdk/core": "0.1.0-beta.5",
+      "@ui-sdk/react": "0.1.0-beta.5"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-15T18:15:08.622Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 0.8236739999999999,
+      "source": "computed from rollout token records and config pricing"
+    },
+    "tokens": {
+      "input": 93648,
+      "cacheRead": 3188480,
+      "cacheWrite": 0,
+      "output": 31753,
+      "reasoning": 7308,
+      "total": 3313881
+    },
+    "time": {
+      "wallMs": 929032,
+      "agentWallMs": 928268,
+      "modelMs": 592333,
+      "toolMs": 335935,
+      "modelTimeSource": "wall clock minus tool time (codex reports no API duration)"
+    },
+    "process": {
+      "turns": 37,
+      "assistantMessages": 9,
+      "subagentsSpawned": 0,
+      "toolCalls": 44,
+      "toolCallsByKind": {
+        "shell": 43,
+        "web": 1
+      },
+      "docs": {
+        "calls": 12,
+        "outputChars": 228912,
+        "timeMs": 833,
+        "librarySourceCalls": 4
+      },
+      "builds": {
+        "runs": 4,
+        "failures": 0
+      },
+      "installs": 1,
+      "testRuns": 18,
+      "failedToolCalls": 5,
+      "toolTimeMs": 335935
+    },
+    "skills": {
+      "available": [
+        "imagegen",
+        "openai-docs",
+        "skill-creator",
+        "skill-installer",
+        "ui-sdk"
+      ],
+      "benchmarkSkillAvailable": true,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 3,
+        "rawBytes": 334905,
+        "gzipBytes": 106654,
+        "jsGzipBytes": 101137,
+        "cssGzipBytes": 5173
+      },
+      "dependencies": {
+        "added": [
+          {
+            "name": "@playwright/test",
+            "version": "^1.65.1",
+            "dev": true
+          }
+        ],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 13,
+        "linesAdded": 880,
+        "linesRemoved": 10,
+        "codeLinesAdded": 871
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 15,
+        "itemsTotal": 15,
+        "testsPassed": 20,
+        "testsTotal": 20,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 2,
+        "statesChecked": 4,
+        "violations": 0,
+        "byImpact": {},
+        "rules": []
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 0
+    }
+  },
+  {
+    "id": "f74d05825be4",
+    "runId": "03-spreadsheet__shadcn__claude__r1",
+    "task": "03-spreadsheet",
+    "taskTitle": "Spreadsheet grid",
+    "category": "new-behavior",
+    "arm": "shadcn",
+    "agent": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "2.1.325",
+    "libraryVersions": {
+      "shadcn": "4.23.0",
+      "@base-ui/react": "1.9.0",
+      "lucide-react": "1.73.0"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-16T16:07:36.446Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 1.5285388000000002,
+      "source": "claude-code total_cost_usd"
+    },
+    "tokens": {
+      "input": 42,
+      "cacheRead": 1116574,
+      "cacheWrite": 66512,
+      "output": 38648,
+      "reasoning": 16917,
+      "total": 1221776
+    },
+    "time": {
+      "wallMs": 430657,
+      "agentWallMs": 429319,
+      "modelMs": 365004,
+      "toolMs": 64161,
+      "modelTimeSource": "claude-code duration_api_ms"
+    },
+    "process": {
+      "turns": 23,
+      "assistantMessages": 21,
+      "subagentMessages": 0,
+      "subagentsSpawned": 0,
+      "toolCalls": 22,
+      "toolCallsByKind": {
+        "shell": 15,
+        "write": 4,
+        "read": 3
+      },
+      "docs": {
+        "calls": 0,
+        "outputChars": 0,
+        "timeMs": 0,
+        "librarySourceCalls": 0
+      },
+      "builds": {
+        "runs": 4,
+        "failures": 1
+      },
+      "installs": 2,
+      "testRuns": 6,
+      "failedToolCalls": 3,
+      "toolTimeMs": 64161
+    },
+    "skills": {
+      "available": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator",
+        "plugin-authoring"
+      ],
+      "benchmarkSkillAvailable": null,
+      "benchmarkSkillUsed": false
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 3,
+        "rawBytes": 331104,
+        "gzipBytes": 100636,
+        "jsGzipBytes": 91753,
+        "cssGzipBytes": 8622
+      },
+      "dependencies": {
+        "added": [],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 9,
+        "linesAdded": 1140,
+        "linesRemoved": 3,
+        "codeLinesAdded": 1140
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 15,
+        "itemsTotal": 15,
+        "testsPassed": 19,
+        "testsTotal": 20,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 1,
+        "statesChecked": 4,
+        "violations": 3,
+        "byImpact": {
+          "serious": 3
+        },
+        "rules": [
+          "color-contrast"
+        ]
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 45
+    }
+  },
+  {
+    "id": "f1323e759b2e",
+    "runId": "03-spreadsheet__ui-sdk__claude__r1",
+    "task": "03-spreadsheet",
+    "taskTitle": "Spreadsheet grid",
+    "category": "new-behavior",
+    "arm": "ui-sdk",
+    "agent": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "2.1.325",
+    "libraryVersions": {
+      "@ui-sdk/core": "0.1.0-beta.5",
+      "@ui-sdk/react": "0.1.0-beta.5"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-16T20:50:13.080Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 2.3193978,
+      "source": "claude-code total_cost_usd"
+    },
+    "tokens": {
+      "input": 76,
+      "cacheRead": 2755209,
+      "cacheWrite": 99119,
+      "output": 48755,
+      "reasoning": 24000,
+      "total": 2903159
+    },
+    "time": {
+      "wallMs": 615007,
+      "agentWallMs": 613764,
+      "modelMs": 486037,
+      "toolMs": 128323,
+      "modelTimeSource": "claude-code duration_api_ms"
+    },
+    "process": {
+      "turns": 46,
+      "assistantMessages": 37,
+      "subagentMessages": 0,
+      "subagentsSpawned": 0,
+      "toolCalls": 44,
+      "toolCallsByKind": {
+        "skill": 1,
+        "shell": 31,
+        "write": 4,
+        "read": 8
+      },
+      "docs": {
+        "calls": 9,
+        "outputChars": 61757,
+        "timeMs": 209,
+        "librarySourceCalls": 7
+      },
+      "builds": {
+        "runs": 5,
+        "failures": 1
+      },
+      "installs": 1,
+      "testRuns": 5,
+      "failedToolCalls": 3,
+      "toolTimeMs": 128323
+    },
+    "skills": {
+      "available": [
+        "ui-sdk",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator",
+        "plugin-authoring"
+      ],
+      "benchmarkSkillAvailable": true,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 3,
+        "rawBytes": 386481,
+        "gzipBytes": 105023,
+        "jsGzipBytes": 90265,
+        "cssGzipBytes": 14498
+      },
+      "dependencies": {
+        "added": [],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 4,
+        "linesAdded": 852,
+        "linesRemoved": 3,
+        "codeLinesAdded": 852
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 15,
+        "itemsTotal": 15,
+        "testsPassed": 20,
+        "testsTotal": 20,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 2,
+        "statesChecked": 4,
+        "violations": 0,
+        "byImpact": {},
+        "rules": []
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 0
+    }
+  },
+  {
+    "id": "cd4e56728202",
+    "runId": "04-flow-canvas__shadcn__codex__r1",
+    "task": "04-flow-canvas",
+    "taskTitle": "Agent flow canvas",
+    "category": "new-behavior",
+    "arm": "shadcn",
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "0.169.0",
+    "libraryVersions": {
+      "shadcn": "4.23.0",
+      "@base-ui/react": "1.9.0",
+      "lucide-react": "1.73.0"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-15T17:56:27.602Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 0.6998103999999999,
+      "source": "computed from rollout token records and config pricing"
+    },
+    "tokens": {
+      "input": 50113,
+      "cacheRead": 1596544,
+      "cacheWrite": 0,
+      "output": 43993,
+      "reasoning": 9846,
+      "total": 1690650
+    },
+    "time": {
+      "wallMs": 1087712,
+      "agentWallMs": 1086980,
+      "modelMs": 986373,
+      "toolMs": 100607,
+      "modelTimeSource": "wall clock minus tool time (codex reports no API duration)"
+    },
+    "process": {
+      "turns": 24,
+      "assistantMessages": 6,
+      "subagentsSpawned": 0,
+      "toolCalls": 25,
+      "toolCallsByKind": {
+        "shell": 25
+      },
+      "docs": {
+        "calls": 5,
+        "outputChars": 61575,
+        "timeMs": 9367,
+        "librarySourceCalls": 2
+      },
+      "builds": {
+        "runs": 4,
+        "failures": 1
+      },
+      "installs": 3,
+      "testRuns": 8,
+      "failedToolCalls": 5,
+      "toolTimeMs": 100607
+    },
+    "skills": {
+      "available": [
+        "imagegen",
+        "openai-docs",
+        "skill-creator",
+        "skill-installer",
+        "shadcn"
+      ],
+      "benchmarkSkillAvailable": true,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 5,
+        "rawBytes": 607562,
+        "gzipBytes": 165092,
+        "jsGzipBytes": 147489,
+        "cssGzipBytes": 17340
+      },
+      "dependencies": {
+        "added": [
+          {
+            "name": "@fontsource-variable/dm-sans",
+            "version": "^5.3.0",
+            "dev": false
+          },
+          {
+            "name": "@playwright/test",
+            "version": "^1.65.1",
+            "dev": true
+          }
+        ],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 22,
+        "linesAdded": 2079,
+        "linesRemoved": 6,
+        "codeLinesAdded": 2073
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 16,
+        "itemsTotal": 16,
+        "testsPassed": 19,
+        "testsTotal": 21,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true,
+          "A16": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 0,
+        "statesChecked": 5,
+        "violations": 10,
+        "byImpact": {
+          "serious": 10
+        },
+        "rules": [
+          "color-contrast",
+          "label-content-name-mismatch",
+          "aria-hidden-focus"
+        ]
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 152
+    }
+  },
+  {
+    "id": "2d5b2d305d0f",
+    "runId": "04-flow-canvas__ui-sdk__codex__r1",
+    "task": "04-flow-canvas",
+    "taskTitle": "Agent flow canvas",
+    "category": "new-behavior",
+    "arm": "ui-sdk",
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "0.169.0",
+    "libraryVersions": {
+      "@ui-sdk/core": "0.1.0-beta.5",
+      "@ui-sdk/react": "0.1.0-beta.5"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-15T18:50:34.164Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 1.211395200000001,
+      "source": "computed from rollout token records and config pricing"
+    },
+    "tokens": {
+      "input": 94184,
+      "cacheRead": 5196672,
+      "cacheWrite": 0,
+      "output": 50336,
+      "reasoning": 13138,
+      "total": 5341192
+    },
+    "time": {
+      "wallMs": 1357095,
+      "agentWallMs": 1356321,
+      "modelMs": 665818,
+      "toolMs": 690503,
+      "modelTimeSource": "wall clock minus tool time (codex reports no API duration)"
+    },
+    "process": {
+      "turns": 49,
+      "assistantMessages": 7,
+      "subagentsSpawned": 0,
+      "toolCalls": 56,
+      "toolCallsByKind": {
+        "shell": 56
+      },
+      "docs": {
+        "calls": 17,
+        "outputChars": 511287,
+        "timeMs": 33,
+        "librarySourceCalls": 11
+      },
+      "builds": {
+        "runs": 5,
+        "failures": 2
+      },
+      "installs": 1,
+      "testRuns": 19,
+      "failedToolCalls": 12,
+      "toolTimeMs": 690503
+    },
+    "skills": {
+      "available": [
+        "imagegen",
+        "openai-docs",
+        "skill-creator",
+        "skill-installer",
+        "ui-sdk"
+      ],
+      "benchmarkSkillAvailable": true,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 4,
+        "rawBytes": 565871,
+        "gzipBytes": 180777,
+        "jsGzipBytes": 171857,
+        "cssGzipBytes": 8556
+      },
+      "dependencies": {
+        "added": [
+          {
+            "name": "lucide-react",
+            "version": "^1.73.0",
+            "dev": false
+          },
+          {
+            "name": "@playwright/test",
+            "version": "^1.65.1",
+            "dev": true
+          }
+        ],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 12,
+        "linesAdded": 793,
+        "linesRemoved": 10,
+        "codeLinesAdded": 776
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 15,
+        "itemsTotal": 16,
+        "testsPassed": 18,
+        "testsTotal": 21,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": false,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true,
+          "A16": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 0,
+        "statesChecked": 5,
+        "violations": 8,
+        "byImpact": {
+          "serious": 8
+        },
+        "rules": [
+          "color-contrast",
+          "label-content-name-mismatch"
+        ]
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 29
+    }
+  },
+  {
+    "id": "3ab8e7e97604",
+    "runId": "04-flow-canvas__shadcn__claude__r1",
+    "task": "04-flow-canvas",
+    "taskTitle": "Agent flow canvas",
+    "category": "new-behavior",
+    "arm": "shadcn",
+    "agent": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "2.1.325",
+    "libraryVersions": {
+      "shadcn": "4.23.0",
+      "@base-ui/react": "1.9.0",
+      "lucide-react": "1.73.0"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-16T20:29:18.353Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 4.4398306,
+      "source": "claude-code total_cost_usd"
+    },
+    "tokens": {
+      "input": 102,
+      "cacheRead": 5960633,
+      "cacheWrite": 160602,
+      "output": 98124,
+      "reasoning": 40710,
+      "total": 6219461
+    },
+    "time": {
+      "wallMs": 1225495,
+      "agentWallMs": 1224188,
+      "modelMs": 942335,
+      "toolMs": 281659,
+      "modelTimeSource": "claude-code duration_api_ms"
+    },
+    "process": {
+      "turns": 54,
+      "assistantMessages": 50,
+      "subagentMessages": 0,
+      "subagentsSpawned": 0,
+      "toolCalls": 52,
+      "toolCallsByKind": {
+        "shell": 37,
+        "skill": 1,
+        "write": 6,
+        "read": 8
+      },
+      "docs": {
+        "calls": 1,
+        "outputChars": 23,
+        "timeMs": 5384,
+        "librarySourceCalls": 2
+      },
+      "builds": {
+        "runs": 4,
+        "failures": 1
+      },
+      "installs": 3,
+      "testRuns": 9,
+      "failedToolCalls": 2,
+      "toolTimeMs": 281659
+    },
+    "skills": {
+      "available": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator",
+        "plugin-authoring"
+      ],
+      "benchmarkSkillAvailable": null,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 3,
+        "rawBytes": 422800,
+        "gzipBytes": 121107,
+        "jsGzipBytes": 106499,
+        "cssGzipBytes": 14343
+      },
+      "dependencies": {
+        "added": [],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 23,
+        "linesAdded": 3619,
+        "linesRemoved": 4,
+        "codeLinesAdded": 3619
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 16,
+        "itemsTotal": 16,
+        "testsPassed": 21,
+        "testsTotal": 21,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": true,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true,
+          "A16": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 2,
+        "statesChecked": 5,
+        "violations": 0,
+        "byImpact": {},
+        "rules": []
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 0
+    }
+  },
+  {
+    "id": "123e5e76bb44",
+    "runId": "04-flow-canvas__ui-sdk__claude__r1",
+    "task": "04-flow-canvas",
+    "taskTitle": "Agent flow canvas",
+    "category": "new-behavior",
+    "arm": "ui-sdk",
+    "agent": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "rep": 1,
+    "cliVersion": "2.1.325",
+    "libraryVersions": {
+      "@ui-sdk/core": "0.1.0-beta.5",
+      "@ui-sdk/react": "0.1.0-beta.5"
+    },
+    "status": "completed",
+    "startedAt": "2026-11-16T21:16:34.350Z",
+    "hasApp": true,
+    "cost": {
+      "usd": 5.977107399999998,
+      "source": "claude-code total_cost_usd"
+    },
+    "tokens": {
+      "input": 146,
+      "cacheRead": 10394917,
+      "cacheWrite": 212080,
+      "output": 110045,
+      "reasoning": 43020,
+      "total": 10717188
+    },
+    "time": {
+      "wallMs": 1345623,
+      "agentWallMs": 1344330,
+      "modelMs": 1070814,
+      "toolMs": 273354,
+      "modelTimeSource": "claude-code duration_api_ms"
+    },
+    "process": {
+      "turns": 78,
+      "assistantMessages": 72,
+      "subagentMessages": 0,
+      "subagentsSpawned": 0,
+      "toolCalls": 76,
+      "toolCallsByKind": {
+        "skill": 1,
+        "shell": 59,
+        "write": 8,
+        "read": 8
+      },
+      "docs": {
+        "calls": 15,
+        "outputChars": 118366,
+        "timeMs": 308,
+        "librarySourceCalls": 6
+      },
+      "builds": {
+        "runs": 13,
+        "failures": 1
+      },
+      "installs": 2,
+      "testRuns": 17,
+      "failedToolCalls": 3,
+      "toolTimeMs": 273354
+    },
+    "skills": {
+      "available": [
+        "ui-sdk",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator",
+        "plugin-authoring"
+      ],
+      "benchmarkSkillAvailable": true,
+      "benchmarkSkillUsed": true
+    },
+    "outcome": {
+      "typecheck": {
+        "ok": true,
+        "exitCode": 0,
+        "errors": 0
+      },
+      "build": {
+        "ok": true,
+        "exitCode": 0
+      },
+      "bundle": {
+        "files": 4,
+        "rawBytes": 615044,
+        "gzipBytes": 178480,
+        "jsGzipBytes": 161051,
+        "cssGzipBytes": 17167
+      },
+      "dependencies": {
+        "added": [
+          {
+            "name": "@testing-library/dom",
+            "version": "^10.4.2",
+            "dev": true
+          },
+          {
+            "name": "@testing-library/react",
+            "version": "^16.3.3",
+            "dev": true
+          },
+          {
+            "name": "@testing-library/user-event",
+            "version": "^14.6.12",
+            "dev": true
+          },
+          {
+            "name": "jsdom",
+            "version": "^31.0.1",
+            "dev": true
+          },
+          {
+            "name": "vitest",
+            "version": "^5.1.0",
+            "dev": true
+          }
+        ],
+        "removed": [],
+        "changed": [],
+        "banned": []
+      },
+      "diff": {
+        "filesChanged": 15,
+        "linesAdded": 2441,
+        "linesRemoved": 6,
+        "codeLinesAdded": 2433
+      },
+      "load": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "rendered": true,
+        "horizontalOverflowAt375": false
+      }
+    },
+    "quality": {
+      "acceptance": {
+        "itemsPassed": 15,
+        "itemsTotal": 16,
+        "testsPassed": 18,
+        "testsTotal": 21,
+        "items": {
+          "A1": true,
+          "A2": true,
+          "A3": true,
+          "A4": false,
+          "A5": true,
+          "A6": true,
+          "A7": true,
+          "A8": true,
+          "A9": true,
+          "A10": true,
+          "A11": true,
+          "A12": true,
+          "A13": true,
+          "A14": true,
+          "A15": true,
+          "A16": true
+        }
+      },
+      "axe": {
+        "tests": 2,
+        "passed": 0,
+        "statesChecked": 5,
+        "violations": 10,
+        "byImpact": {
+          "serious": 10
+        },
+        "rules": [
+          "listitem",
+          "target-size"
+        ]
+      },
+      "keyboard": {
+        "tests": 1,
+        "passed": 1,
+        "ok": true
+      },
+      "screenshots": [
+        {
+          "file": "375-light.png",
+          "width": 375,
+          "scheme": "light"
+        },
+        {
+          "file": "768-light.png",
+          "width": 768,
+          "scheme": "light"
+        },
+        {
+          "file": "1280-light.png",
+          "width": 1280,
+          "scheme": "light"
+        },
+        {
+          "file": "375-dark.png",
+          "width": 375,
+          "scheme": "dark"
+        },
+        {
+          "file": "768-dark.png",
+          "width": 768,
+          "scheme": "dark"
+        },
+        {
+          "file": "1280-dark.png",
+          "width": 1280,
+          "scheme": "dark"
+        }
+      ],
+      "axeFailingChecks": 15
+    }
+  }
+]

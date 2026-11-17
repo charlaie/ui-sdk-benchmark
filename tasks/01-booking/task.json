@@ -1,0 +1,13 @@
+{
+  "id": "01-booking",
+  "title": "Meeting booking dialog",
+  "category": "composition",
+  "mock": "mock",
+  "bannedDependencies": [
+    "@fullcalendar/*",
+    "fullcalendar",
+    "react-big-calendar",
+    "@schedule-x/*",
+    "dhtmlx-scheduler"
+  ]
+}

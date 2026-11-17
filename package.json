@@ -1,0 +1,21 @@
+{
+  "name": "ui-sdk-benchmark",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "templates:sync": "node scripts/sync-templates.mjs",
+    "templates:check": "node scripts/sync-templates.mjs --check && node scripts/verify-templates.mjs",
+    "bench": "node runner/run.mjs",
+    "evaluate": "node runner/evaluate.mjs",
+    "summary": "node scripts/summary.mjs",
+    "gallery": "node scripts/build-gallery.mjs",
+    "test:acceptance": "node scripts/test-template.mjs",
+    "test:helpers": "playwright test --config acceptance/_selfcheck/playwright.config.ts"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.65.1",
+    "@types/node": "24.19.2",
+    "typescript": "7.0.2"
+  }
+}

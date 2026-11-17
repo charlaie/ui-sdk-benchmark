@@ -1,0 +1,17 @@
+{
+  "id": "02-inbox",
+  "title": "Issue triage inbox",
+  "category": "composition",
+  "mock": "mock",
+  "bannedDependencies": [
+    "ag-grid-*",
+    "@ag-grid-community/*",
+    "react-data-grid",
+    "@mui/x-data-grid*",
+    "@glideapps/glide-data-grid",
+    "handsontable",
+    "@handsontable/*",
+    "mantine-react-table",
+    "material-react-table"
+  ]
+}
